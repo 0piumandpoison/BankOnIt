@@ -45,6 +45,7 @@ public class Bank implements HasMenu{
 			}
 			else if (result.equals("2")){
 				System.out.println("Customer login.");
+				this.loginAsCustomer();
 			}
 			else {
 				System.out.println("Not a valid input.");
@@ -61,6 +62,7 @@ public class Bank implements HasMenu{
 			}
 			else if (result.equals("1")){
 				System.out.println("Full Customer Report.");
+				this.reportAllCustomers();
 			}
 			else if (result.equals("2")){
 				System.out.println("Add a User.");
@@ -102,6 +104,28 @@ public class Bank implements HasMenu{
 			customer.savings.calcInterest();
 		} //end for
 	} //end applyInterest
+	
+	public void loginAsCustomer(){
+		Scanner input = new Scanner(System.in);
+                System.out.print("Username: ");
+                String userName = input.nextLine();
+                System.out.print("PIN: ");
+                String PIN = input.nextLine();
+
+		Customer currentCustomer = null;
+		for (Customer customer : customers){
+			if (customer.login(userName, PIN)){
+				currentCustomer = customer;
+			} //end if
+		} //end for
+		
+		if (currentCustomer == null){
+			System.out.println("Customer not found.");
+		}
+		else {
+			currentCustomer.start();
+		} //end if
+	} //end loginAsCustomer
 } //end class def
 
 class CustomerList extends ArrayList<Customer> {};
