@@ -11,14 +11,18 @@ public class Bank implements HasMenu{
         } //end main
 	
 	public Bank(){
-		this.fullCustomerReport();
+		//this.loadSampleCustomers();
+		//this.saveCustomers();
+		this.loadCustomers();
 		this.start();
+		this.saveCustomers();
 	} //end bank
 	
 	public String menu(){
 		Scanner input = new Scanner(System.in);
 		System.out.println();
 		System.out.println("Bank Menu.");
+		System.out.println("-------------------------------");
 		System.out.println();
 		System.out.println("0.) Exit System.");
 		System.out.println("1.) Login as Admin.");
@@ -26,6 +30,7 @@ public class Bank implements HasMenu{
 		System.out.println();
 		System.out.print("Action: ");
 		String result = input.nextLine();
+		System.out.println();
 
 		return result;
 	} //end menu
@@ -39,12 +44,14 @@ public class Bank implements HasMenu{
 			}
 			else if (result.equals("1")){
 				System.out.println("Admin login.");
+				System.out.println("-------------------------------");
 				if (this.admin.login()){
 					startAdmin();
 				} //end if
 			}
 			else if (result.equals("2")){
 				System.out.println("Customer login.");
+				System.out.println("-------------------------------");
 				this.loginAsCustomer();
 			}
 			else {
@@ -62,7 +69,7 @@ public class Bank implements HasMenu{
 			}
 			else if (result.equals("1")){
 				System.out.println("Full Customer Report.");
-				this.reportAllCustomers();
+				this.fullCustomerReport();
 			}
 			else if (result.equals("2")){
 				System.out.println("Add a User.");
@@ -126,6 +133,33 @@ public class Bank implements HasMenu{
 			currentCustomer.start();
 		} //end if
 	} //end loginAsCustomer
+	
+	public void saveCustomers(){
+		try{
+			FileOutputStream fo = new FileOutputStream("Customers.dat");
+			ObjectOutputStream obOut = new ObjectOutputStream(fo);
+			obOut.writeObject(customers);
+			obOut.close();
+			fo.close();
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		} //end try
+	} //end saveCustomers
+
+	public void loadCustomers(){
+		try{
+			FileInputStream fi = new FileInputStream("Customers.dat");
+			ObjectInputStream obIn = new ObjectInputStream(fi);
+			customers = (CustomerList)obIn.readObject();
+			obIn.close();
+			fi.close();
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		} //end try
+	} //end loadCustomers
+
 } //end class def
 
 class CustomerList extends ArrayList<Customer> {};
