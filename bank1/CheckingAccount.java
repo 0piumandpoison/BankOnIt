@@ -40,14 +40,17 @@ public class CheckingAccount implements HasMenu, Serializable{
 				keepGoing = false;
 			}
 			else if (response.equals("1")){
+				System.out.println();
 				System.out.println(" Checking balance...");
 				this.checkBalance();
 			}
 			else if (response.equals("2")){
+				System.out.println();
 				System.out.println(" Making a deposit...");
 				this.makeDeposit();
 			}
 			else if (response.equals("3")){
+				System.out.println();
 				System.out.println(" Making a withdrawal...");
 				this.makeWithdrawal();
 			}

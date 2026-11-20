@@ -43,6 +43,7 @@ public class Bank implements HasMenu{
 				keepGoing = false;
 			}
 			else if (result.equals("1")){
+				System.out.println();
 				System.out.println("Admin login.");
 				System.out.println("-------------------------------");
 				if (this.admin.login()){
@@ -50,6 +51,7 @@ public class Bank implements HasMenu{
 				} //end if
 			}
 			else if (result.equals("2")){
+				System.out.println();
 				System.out.println("Customer login.");
 				System.out.println("-------------------------------");
 				this.loginAsCustomer();
@@ -68,15 +70,21 @@ public class Bank implements HasMenu{
 				keepGoing = false;
 			}
 			else if (result.equals("1")){
+				System.out.println();
 				System.out.println("Full Customer Report.");
+				System.out.println("-------------------------------");
 				this.fullCustomerReport();
 			}
 			else if (result.equals("2")){
+				System.out.println();
 				System.out.println("Add a User.");
+				System.out.println("-------------------------------");
 				this.addUser();
 			}
 			else if (result.equals("3")){
+				System.out.println();
 				System.out.println("Apply Interest to Savings.");
+				System.out.println("-------------------------------");
 				this.applyInterest();
 			}
 			else {
